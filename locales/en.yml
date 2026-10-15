@@ -1,0 +1,5 @@
+en:
+  theme_metadata:
+    description: Renders an events calendar on custom topic list pages
+    settings:
+      example_setting: A description of a setting.
