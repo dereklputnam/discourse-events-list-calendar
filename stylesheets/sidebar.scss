@@ -1,0 +1,38 @@
+.events-list-sidebar {
+  box-sizing: border-box;
+
+  &__heading {
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid var(--primary-low);
+  }
+}
+
+// The sidebar renders inside #list-area, next to the topic list
+.has-events-list-sidebar {
+  @include viewport.from(md) {
+    #list-area {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 25%;
+      column-gap: var(--space-6);
+      align-items: start;
+
+      > * {
+        grid-column: 1;
+      }
+
+      > .events-list-sidebar {
+        grid-column: 2;
+        grid-row: 1 / span 20;
+        margin-top: var(--space-3);
+        padding: var(--space-4);
+      }
+    }
+  }
+
+  @include viewport.until(md) {
+    .events-list-sidebar {
+      display: none;
+    }
+  }
+}

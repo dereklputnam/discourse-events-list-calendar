@@ -1,5 +1,24 @@
 en:
   theme_metadata:
-    description: Renders an events calendar on custom topic list pages
+    description: Renders an events calendar or upcoming events sidebar on custom topic list pages created with Discourse Custom Topic Lists
     settings:
-      example_setting: A description of a setting.
+      list_pages:
+        description: "Lists themselves are created and managed with Discourse Custom Topic Lists (https://meta.discourse.org/t/discourse-custom-topic-lists/311186). Add a row here for each list that should show the events calendar or upcoming events sidebar. Enter the list's slug from Custom Topic Lists (e.g. events for /lists/events)."
+        schema:
+          properties:
+            slug:
+              label: "List slug"
+              description: "The slug of the list as set in Custom Topic Lists, e.g. events for /lists/events"
+            layout:
+              label: "Layout"
+              description: "Full calendar, or upcoming events sidebar"
+            tags:
+              label: "Event tags"
+              description: "Optional: only show events from topics with these tags. Leave empty to show all events."
+            hide_topic_list:
+              label: "Hide topic list"
+              description: "Hide the standard topic list on this page"
+  upcoming_events:
+    heading: "Upcoming events"
+    view_all: "View all"
+    empty: "No upcoming events"

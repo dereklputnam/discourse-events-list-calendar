@@ -1,0 +1,13 @@
+.events-list-calendar {
+  margin-bottom: var(--space-6);
+}
+
+.has-events-list-hidden-topics {
+  .contents > .topic-list,
+  .contents > .topic-list-header,
+  .list-container .topic-list,
+  .list-controls,
+  .category-list {
+    display: none;
+  }
+}

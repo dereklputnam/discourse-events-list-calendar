@@ -1,2 +1,25 @@
-example_setting:
-  default: true
+list_pages:
+  type: objects
+  default:
+    - slug: "events"
+      layout: "calendar"
+      hide_topic_list: false
+  schema:
+    name: list page
+    identifier: slug
+    properties:
+      slug:
+        type: string
+        required: true
+        validations:
+          min_length: 1
+      layout:
+        type: enum
+        required: true
+        choices:
+          - calendar
+          - sidebar
+      tags:
+        type: tags
+      hide_topic_list:
+        type: boolean
