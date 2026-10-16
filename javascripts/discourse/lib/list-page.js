@@ -16,28 +16,3 @@ export function showsCalendar(page) {
 export function showsSidebar(page) {
   return page?.layout === "sidebar";
 }
-
-// Removes events in the row's excluded categories and their subcategories.
-// `categories` is the site's category list.
-export function excludeEvents(events, page, categories) {
-  const excluded = new Set(
-    (page?.exclude_categories || []).map(Number).filter(Boolean)
-  );
-  if (!excluded.size) {
-    return events;
-  }
-
-  const parentOf = new Map(categories.map((c) => [c.id, c.parent_category_id]));
-  const isExcluded = (id) => {
-    for (let c = id; c; c = parentOf.get(c)) {
-      if (excluded.has(c)) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  return events.filter(
-    (e) => !isExcluded(Number(e.categoryId ?? e.category_id))
-  );
-}

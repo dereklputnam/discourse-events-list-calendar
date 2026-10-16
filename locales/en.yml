@@ -12,9 +12,6 @@ en:
             layout:
               label: "Layout"
               description: "Full calendar, or upcoming events sidebar"
-            exclude_categories:
-              label: "Exclude categories"
-              description: "Events in these categories, and their subcategories, are left out"
             hide_topic_list:
               label: "Hide topic list"
               description: "Hide the standard topic list on this page"

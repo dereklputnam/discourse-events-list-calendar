@@ -5,7 +5,6 @@ import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { service } from "@ember/service";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { i18n } from "discourse-i18n";
-import { excludeEvents, findListPage } from "../lib/list-page";
 
 const MAX_EVENTS = 10;
 const WINDOW_DAYS = 180;
@@ -14,8 +13,6 @@ const WINDOW_DAYS = 180;
 // plugin's `upcoming-events-list` block so the plugin's CSS applies.
 export default class EventsUpcomingList extends Component {
   @service discoursePostEventService;
-  @service router;
-  @service site;
 
   @tracked events = [];
   @tracked loading = true;
@@ -32,8 +29,7 @@ export default class EventsUpcomingList extends Component {
         include_ongoing: true,
       });
 
-      const page = findListPage(this.router.currentURL);
-      this.events = excludeEvents(events, page, this.site.categories)
+      this.events = events
         .map((e) => ({
           title: e.name || e.post?.topic?.title,
           url: e.post?.url,
