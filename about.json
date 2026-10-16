@@ -1,7 +1,7 @@
 {
   "name": "Events List Calendar",
   "component": true,
-  "authors": "Netwrix",
+  "authors": "putty",
   "about_url": "https://github.com/dereklputnam/discourse-events-list-calendar",
   "license_url": "https://github.com/dereklputnam/discourse-events-list-calendar/blob/main/LICENSE",
   "learn_more": "https://github.com/dereklputnam/discourse-events-list-calendar#readme",

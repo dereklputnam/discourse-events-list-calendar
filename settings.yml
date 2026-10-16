@@ -1,9 +1,6 @@
 list_pages:
   type: objects
-  default:
-    - slug: "events"
-      layout: "calendar"
-      hide_topic_list: false
+  default: []
   schema:
     name: list page
     identifier: slug
