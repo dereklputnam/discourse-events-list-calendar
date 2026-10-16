@@ -1,7 +1,6 @@
 import { module, test } from "qunit";
 import {
   findListPage,
-  pageTags,
   showsCalendar,
   showsSidebar,
 } from "../../../javascripts/discourse/lib/list-page";
@@ -9,7 +8,7 @@ import {
 module("Unit | Lib | list-page", function () {
   const pages = [
     { slug: "events", layout: "sidebar" },
-    { slug: "Endpoint-Protector", layout: "calendar", tags: ["ep"] },
+    { slug: "Endpoint-Protector", layout: "calendar" },
   ];
 
   test("findListPage matches the slug after /lists/", function (assert) {
@@ -47,12 +46,5 @@ module("Unit | Lib | list-page", function () {
     assert.false(showsCalendar({ layout: "sidebar" }));
     assert.false(showsCalendar(undefined));
     assert.false(showsSidebar(undefined));
-  });
-
-  test("pageTags returns an array of tag names", function (assert) {
-    assert.deepEqual(pageTags({ tags: ["a", "b"] }), ["a", "b"]);
-    assert.deepEqual(pageTags({ tags: "a|b" }), ["a", "b"]);
-    assert.deepEqual(pageTags({}), []);
-    assert.deepEqual(pageTags(undefined), []);
   });
 });

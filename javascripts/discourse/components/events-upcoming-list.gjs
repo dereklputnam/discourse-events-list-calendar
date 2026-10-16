@@ -5,16 +5,13 @@ import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import { service } from "@ember/service";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { i18n } from "discourse-i18n";
-import { findListPage, pageTags } from "../lib/list-page";
 
 const MAX_EVENTS = 10;
 const WINDOW_DAYS = 180;
 
 // Upcoming events list for the sidebar layout. Mirrors the markup of the calendar
-// plugin's `upcoming-events-list` block (so its CSS applies) but can be scoped to
-// the tags set on the matching `list_pages` row, which the plugin block cannot.
+// plugin's `upcoming-events-list` block so the plugin's CSS applies.
 export default class EventsUpcomingList extends Component {
-  @service router;
   @service discoursePostEventService;
 
   @tracked events = [];
@@ -22,7 +19,6 @@ export default class EventsUpcomingList extends Component {
 
   @action
   async load() {
-    const tags = pageTags(findListPage(this.router.currentURL));
     const now = new Date();
     const until = new Date(now.getTime() + WINDOW_DAYS * 24 * 60 * 60 * 1000);
 
@@ -31,7 +27,6 @@ export default class EventsUpcomingList extends Component {
         after: now.toISOString(),
         before: until.toISOString(),
         include_ongoing: true,
-        ...(tags.length ? { tags } : {}),
       });
 
       this.events = events

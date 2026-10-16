@@ -12,9 +12,6 @@ en:
             layout:
               label: "Layout"
               description: "Full calendar, or upcoming events sidebar"
-            tags:
-              label: "Event tags"
-              description: "Optional: only show events from topics with these tags. Leave empty to show all events."
             hide_topic_list:
               label: "Hide topic list"
               description: "Hide the standard topic list on this page"

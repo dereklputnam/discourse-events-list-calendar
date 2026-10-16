@@ -16,11 +16,3 @@ export function showsCalendar(page) {
 export function showsSidebar(page) {
   return page?.layout === "sidebar";
 }
-
-// Optional tag filter for a row, as an array of tag names.
-export function pageTags(page) {
-  const tags = page?.tags;
-  return (Array.isArray(tags) ? tags : String(tags || "").split("|")).filter(
-    Boolean
-  );
-}

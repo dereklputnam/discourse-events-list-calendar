@@ -18,20 +18,19 @@ The Discourse Calendar category calendar needs a category ID. Custom list pages 
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | List slug       | The slug as set in Custom Topic Lists, for example `events` for `/lists/events`. Matched exactly, ignoring case.                                |
 | Layout          | `calendar` shows the full calendar above the topic list. `sidebar` shows an upcoming events list to the right of the topic list (desktop only). |
-| Event tags      | Optional. Only events from topics with these tags are shown. Leave empty for all events.                                                        |
 | Hide topic list | Optional. Hides the standard topic list on that page.                                                                                           |
 
-Lists themselves, including which topics they show, are managed in Custom Topic Lists. This component does not change a list's query. Event tags only scope the calendar or sidebar.
+Lists themselves, including which topics they show, are managed in Custom Topic Lists. This component does not change a list's query, and the calendar and sidebar always show all events.
 
 ## How it works
 
 - The calendar reuses the plugin's own FullCalendar wrapper, so the views (day, week, month, year), styling and event colors match the category calendar.
-- The sidebar is a small list that reuses the plugin's `upcoming-events-list` CSS classes. It is built here, not imported, so it can be scoped by tag.
+- The sidebar is a small list that reuses the plugin's `upcoming-events-list` CSS classes. It is built here instead of importing the plugin's block.
 - Both render in the `discovery-list-container-top` outlet and only appear when the current URL matches a `list_pages` row.
 
 ## Tests
 
-`test/unit/lib/list-page-test.js` covers slug matching and the layout and tag helpers. It runs as part of the theme's QUnit suite on a development Discourse. QUnit cannot run on production-mode sites.
+`test/unit/lib/list-page-test.js` covers slug matching and the layout helpers. It runs as part of the theme's QUnit suite on a development Discourse. QUnit cannot run on production-mode sites.
 
 ## License
 
