@@ -1,5 +1,6 @@
 import { module, test } from "qunit";
 import {
+  excludeEvents,
   findListPage,
   showsCalendar,
   showsSidebar,
@@ -46,5 +47,33 @@ module("Unit | Lib | list-page", function () {
     assert.false(showsCalendar({ layout: "sidebar" }));
     assert.false(showsCalendar(undefined));
     assert.false(showsSidebar(undefined));
+  });
+
+  test("excludeEvents drops excluded categories and their subcategories", function (assert) {
+    const categories = [
+      { id: 1 },
+      { id: 2, parent_category_id: 1 },
+      { id: 3, parent_category_id: 2 },
+      { id: 4 },
+    ];
+    const events = [
+      { id: "a", categoryId: 1 },
+      { id: "b", category_id: 3 },
+      { id: "c", categoryId: 4 },
+    ];
+
+    assert.deepEqual(
+      excludeEvents(events, { exclude_categories: [2] }, categories).map(
+        (e) => e.id
+      ),
+      ["a", "c"]
+    );
+    assert.deepEqual(
+      excludeEvents(events, { exclude_categories: ["1"] }, categories).map(
+        (e) => e.id
+      ),
+      ["c"]
+    );
+    assert.strictEqual(excludeEvents(events, {}, categories), events);
   });
 });

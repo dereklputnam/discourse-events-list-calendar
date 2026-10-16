@@ -6,9 +6,12 @@ import { popupAjaxError } from "discourse/lib/ajax-error";
 // the list page matches the official category calendar (views, styling, colors).
 import FullCalendar from "discourse/plugins/discourse-events/discourse/components/full-calendar";
 import formatEventForCalendar from "discourse/plugins/discourse-events/discourse/lib/format-event-for-calendar";
+import { excludeEvents, findListPage } from "../lib/list-page";
 
 export default class EventsCalendarGrid extends Component {
   @service currentUser;
+  @service router;
+  @service site;
   @service siteSettings;
   @service discoursePostEventService;
 
@@ -25,7 +28,8 @@ export default class EventsCalendarGrid extends Component {
         include_ongoing: true,
       });
       const timezone = this.currentUser?.user_option?.timezone;
-      return events.map((e) =>
+      const page = findListPage(this.router.currentURL);
+      return excludeEvents(events, page, this.site.categories).map((e) =>
         formatEventForCalendar(
           e,
           this.siteSettings.map_events_to_color,

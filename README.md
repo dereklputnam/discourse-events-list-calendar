@@ -14,11 +14,12 @@ The Discourse Calendar category calendar needs a category ID. Custom list pages 
 
 `list_pages` has one row per list page:
 
-| Field           | Description                                                                                                                                     |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| List slug       | The slug as set in Custom Topic Lists, for example `events` for `/lists/events`. Matched exactly, ignoring case.                                |
-| Layout          | `calendar` shows the full calendar above the topic list. `sidebar` shows an upcoming events list to the right of the topic list (desktop only). |
-| Hide topic list | Optional. Hides the standard topic list on that page.                                                                                           |
+| Field              | Description                                                                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| List slug          | The slug as set in Custom Topic Lists, for example `events` for `/lists/events`. Matched exactly, ignoring case.                                |
+| Layout             | `calendar` shows the full calendar above the topic list. `sidebar` shows an upcoming events list to the right of the topic list (desktop only). |
+| Exclude categories | Optional. Events in these categories and their subcategories are left out of the calendar or sidebar.                                           |
+| Hide topic list    | Optional. Hides the standard topic list on that page.                                                                                           |
 
 Lists themselves, including which topics they show, are managed in Custom Topic Lists. This component does not change a list's query, and the calendar and sidebar always show all events.
 
