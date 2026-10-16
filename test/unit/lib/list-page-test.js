@@ -3,7 +3,7 @@ import {
   findListPage,
   showsCalendar,
   showsSidebar,
-} from "../../../javascripts/discourse/lib/list-page";
+} from "../../../discourse/lib/list-page";
 
 module("Unit | Lib | list-page", function () {
   const pages = [

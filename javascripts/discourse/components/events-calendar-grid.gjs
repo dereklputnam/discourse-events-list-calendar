@@ -4,8 +4,13 @@ import { service } from "@ember/service";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 // Reuse the calendar plugin's own FullCalendar wrapper and event formatter so
 // the list page matches the official category calendar (views, styling, colors).
-import FullCalendar from "discourse/plugins/discourse-events/discourse/components/full-calendar";
-import formatEventForCalendar from "discourse/plugins/discourse-events/discourse/lib/format-event-for-calendar";
+// The imports are optional so the theme still loads where the plugin is absent.
+import FullCalendar from "discourse/plugins/discourse-events/discourse/components/full-calendar" with {
+  discourseImport: "optional",
+};
+import formatEventForCalendar from "discourse/plugins/discourse-events/discourse/lib/format-event-for-calendar" with {
+  discourseImport: "optional",
+};
 
 export default class EventsCalendarGrid extends Component {
   @service currentUser;
@@ -39,12 +44,14 @@ export default class EventsCalendarGrid extends Component {
 
   <template>
     <div class="events-list-calendar">
-      <FullCalendar
-        @height="650px"
-        @placeholder={{true}}
-        @onLoadEvents={{this.loadEvents}}
-        @refreshKey={{this.refreshKey}}
-      />
+      {{#if FullCalendar}}
+        <FullCalendar
+          @height="650px"
+          @placeholder={{true}}
+          @onLoadEvents={{this.loadEvents}}
+          @refreshKey={{this.refreshKey}}
+        />
+      {{/if}}
     </div>
   </template>
 }
