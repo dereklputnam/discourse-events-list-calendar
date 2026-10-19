@@ -16,5 +16,7 @@ list_pages:
         choices:
           - calendar
           - sidebar
+      events_only:
+        type: boolean
       hide_topic_list:
         type: boolean

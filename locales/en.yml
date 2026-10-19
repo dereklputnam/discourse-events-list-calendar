@@ -12,6 +12,9 @@ en:
             layout:
               label: "Layout"
               description: "Full calendar, or upcoming events sidebar"
+            events_only:
+              label: "Only topics with events"
+              description: "Hide topics in the list that have no event object, such as archive posts. They are hidden in the browser, so the list's paging still counts them."
             hide_topic_list:
               label: "Hide topic list"
               description: "Hide the standard topic list on this page"
