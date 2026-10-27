@@ -12,6 +12,8 @@
   }
 }
 
+// Themes such as Horizon set their own display on topic rows with a more
+// specific selector, so a plain display: none would not win.
 .topic-list-item.--no-event {
-  display: none;
+  display: none !important;
 }
