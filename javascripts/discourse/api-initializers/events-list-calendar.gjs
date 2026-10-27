@@ -1,12 +1,14 @@
 import { apiInitializer } from "discourse/lib/api";
 import EventsListCalendar from "../components/events-list-calendar";
 import EventsListSidebar from "../components/events-list-sidebar";
+import EventsNewTopicButton from "../components/events-new-topic-button";
 import eventTopicIds from "../lib/event-topic-ids";
 import { findListPage, showsSidebar } from "../lib/list-page";
 
 export default apiInitializer((api) => {
   api.renderInOutlet("discovery-list-container-top", EventsListCalendar);
   api.renderInOutlet("discovery-list-container-top", EventsListSidebar);
+  api.renderInOutlet("discovery-list-container-top", EventsNewTopicButton);
 
   const router = api.container.lookup("service:router");
 

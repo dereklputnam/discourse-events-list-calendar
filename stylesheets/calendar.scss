@@ -2,6 +2,12 @@
   margin-bottom: var(--space-6);
 }
 
+.events-list-new {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--space-4);
+}
+
 .has-events-list-hidden-topics {
   .contents > .topic-list,
   .contents > .topic-list-header,

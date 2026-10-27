@@ -16,6 +16,15 @@ list_pages:
         choices:
           - calendar
           - sidebar
+      new_button:
+        type: boolean
+      new_label:
+        type: string
+      new_type:
+        type: enum
+        choices:
+          - topic
+          - event
       events_only:
         type: boolean
       hide_topic_list:

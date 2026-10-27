@@ -16,3 +16,67 @@ export function showsCalendar(page) {
 export function showsSidebar(page) {
   return page?.layout === "sidebar";
 }
+
+const CATEGORY_PATH_SEPARATOR = ":";
+
+// Finds a category from a filter path such as `products:auditor:news`, a plain
+// slug, or an ID. `categories` is the site's category list.
+function findCategoryByPath(path, categories) {
+  if (/^\d+$/.test(path)) {
+    return categories.find((c) => c.id === Number(path));
+  }
+
+  const byId = new Map(categories.map((c) => [c.id, c]));
+  const pathOf = (category) => {
+    const slugs = [];
+    for (let c = category; c; c = byId.get(c.parent_category_id)) {
+      slugs.unshift(c.slug);
+    }
+    return slugs.join(CATEGORY_PATH_SEPARATOR);
+  };
+
+  return categories.find((c) => pathOf(c) === path);
+}
+
+// What a new topic should start with, taken from the list's own filter query.
+// Only values that are unambiguous are used: a single positive category, and
+// tags the topic must all have. Negated terms and OR lists are ignored, so the
+// author still chooses whenever the list allows more than one answer.
+export function prefillFromQuery(query, categories = []) {
+  const tags = [];
+  const categoryPaths = [];
+
+  for (const token of (query || "").split(/\s+/)) {
+    const match = /^=?(tag|category):(.+)$/.exec(token);
+    if (!match) {
+      continue;
+    }
+
+    const [, key, value] = match;
+    if (key === "category") {
+      categoryPaths.push(...value.split(",").filter(Boolean));
+    } else if (!value.includes(",")) {
+      tags.push(...value.split("+").filter(Boolean));
+    }
+  }
+
+  const category =
+    categoryPaths.length === 1
+      ? findCategoryByPath(categoryPaths[0], categories)
+      : undefined;
+
+  return { category, tags };
+}
+
+// Starting text for a new event topic: an event block that begins at the next
+// full hour and lasts an hour.
+export function eventBody(timezone, now = new Date()) {
+  const start = new Date(now);
+  start.setHours(start.getHours() + 1, 0, 0, 0);
+  const end = new Date(start.getTime() + 60 * 60 * 1000);
+  const pad = (n) => String(n).padStart(2, "0");
+  const format = (d) =>
+    `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+
+  return `[event start="${format(start)}" end="${format(end)}" status="public" timezone="${timezone}"]\n[/event]`;
+}

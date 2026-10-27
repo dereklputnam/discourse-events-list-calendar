@@ -1,6 +1,8 @@
 import { module, test } from "qunit";
 import {
+  eventBody,
   findListPage,
+  prefillFromQuery,
   showsCalendar,
   showsSidebar,
 } from "../../../discourse/lib/list-page";
@@ -46,5 +48,57 @@ module("Unit | Lib | list-page", function () {
     assert.false(showsCalendar({ layout: "sidebar" }));
     assert.false(showsCalendar(undefined));
     assert.false(showsSidebar(undefined));
+  });
+
+  test("prefillFromQuery uses one positive category and AND tags", function (assert) {
+    const categories = [
+      { id: 1, slug: "products" },
+      { id: 2, slug: "auditor", parent_category_id: 1 },
+      { id: 3, slug: "news", parent_category_id: 2 },
+    ];
+
+    assert.deepEqual(prefillFromQuery("tag:events", categories), {
+      category: undefined,
+      tags: ["events"],
+    });
+    assert.strictEqual(
+      prefillFromQuery("category:products:auditor:news", categories).category,
+      categories[2]
+    );
+    assert.strictEqual(
+      prefillFromQuery("category:3 tag:a+b", categories).category,
+      categories[2]
+    );
+    assert.deepEqual(prefillFromQuery("tag:a+b", categories).tags, ["a", "b"]);
+  });
+
+  test("prefillFromQuery leaves ambiguous or negated terms to the author", function (assert) {
+    const categories = [
+      { id: 1, slug: "a" },
+      { id: 2, slug: "b" },
+    ];
+
+    assert.strictEqual(
+      prefillFromQuery("category:a,b", categories).category,
+      undefined
+    );
+    assert.deepEqual(prefillFromQuery("tag:a,b", categories).tags, []);
+    assert.deepEqual(prefillFromQuery("-tag:x -category:a", categories), {
+      category: undefined,
+      tags: [],
+    });
+    assert.deepEqual(prefillFromQuery(undefined), {
+      category: undefined,
+      tags: [],
+    });
+  });
+
+  test("eventBody starts at the next full hour and lasts an hour", function (assert) {
+    const body = eventBody("America/New_York", new Date(2026, 10, 5, 13, 20));
+
+    assert.strictEqual(
+      body,
+      '[event start="2026-11-05 14:00" end="2026-11-05 15:00" status="public" timezone="America/New_York"]\n[/event]'
+    );
   });
 });
