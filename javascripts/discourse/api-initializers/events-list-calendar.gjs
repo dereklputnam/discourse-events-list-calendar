@@ -8,7 +8,8 @@ import { findListPage, showsSidebar } from "../lib/list-page";
 export default apiInitializer((api) => {
   api.renderInOutlet("discovery-list-container-top", EventsListCalendar);
   api.renderInOutlet("discovery-list-container-top", EventsListSidebar);
-  api.renderInOutlet("discovery-list-container-top", EventsNewTopicButton);
+  // Inside the navigation bar, where the New Topic button sits on /latest
+  api.renderInOutlet("after-create-topic-button", EventsNewTopicButton);
 
   const router = api.container.lookup("service:router");
 

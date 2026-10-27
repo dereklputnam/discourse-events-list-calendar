@@ -14,13 +14,10 @@ en:
               description: "Full calendar, or upcoming events sidebar"
             new_button:
               label: "Show new button"
-              description: "Show a button above the list for creating a new topic or event. The composer opens with the list's single category and tags filled in when its Custom Topic Lists query sets them."
+              description: "Show a New Topic button in the list's navigation bar, like on the latest page. The composer opens with the list's single category and tags filled in when its Custom Topic Lists query sets them."
             new_label:
               label: "New button label"
-              description: "Text of the button, for example New event. Leave empty for New Topic."
-            new_type:
-              label: "New button type"
-              description: "Topic opens a plain composer. Event adds an event block that starts at the next full hour."
+              description: "Text of the button, for example New Event. Leave empty for New Topic."
             events_only:
               label: "Only topics with events"
               description: "Hide topics in the list that have no event object, such as archive posts. They are hidden in the browser, so the list's paging still counts them."

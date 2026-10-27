@@ -1,6 +1,5 @@
 import { module, test } from "qunit";
 import {
-  eventBody,
   findListPage,
   prefillFromQuery,
   showsCalendar,
@@ -91,14 +90,5 @@ module("Unit | Lib | list-page", function () {
       category: undefined,
       tags: [],
     });
-  });
-
-  test("eventBody starts at the next full hour and lasts an hour", function (assert) {
-    const body = eventBody("America/New_York", new Date(2026, 10, 5, 13, 20));
-
-    assert.strictEqual(
-      body,
-      '[event start="2026-11-05 14:00" end="2026-11-05 15:00" status="public" timezone="America/New_York"]\n[/event]'
-    );
   });
 });

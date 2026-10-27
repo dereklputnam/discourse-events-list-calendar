@@ -67,16 +67,3 @@ export function prefillFromQuery(query, categories = []) {
 
   return { category, tags };
 }
-
-// Starting text for a new event topic: an event block that begins at the next
-// full hour and lasts an hour.
-export function eventBody(timezone, now = new Date()) {
-  const start = new Date(now);
-  start.setHours(start.getHours() + 1, 0, 0, 0);
-  const end = new Date(start.getTime() + 60 * 60 * 1000);
-  const pad = (n) => String(n).padStart(2, "0");
-  const format = (d) =>
-    `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-
-  return `[event start="${format(start)}" end="${format(end)}" status="public" timezone="${timezone}"]\n[/event]`;
-}

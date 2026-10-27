@@ -14,15 +14,15 @@ The Discourse Calendar category calendar needs a category ID. Custom list pages 
 
 `list_pages` has one row per list page:
 
-| Field                   | Description                                                                                                                                                                              |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| List slug               | The slug as set in Custom Topic Lists, for example `events` for `/lists/events`. Matched exactly, ignoring case.                                                                         |
-| Layout                  | `calendar` shows the full calendar above the topic list. `sidebar` shows an upcoming events list to the right of the topic list (desktop only).                                          |
-| Show new button         | Optional. Adds a button above the list that opens the composer. Prefills the category and tags only when the list's Custom Topic Lists query sets exactly one category or required tags. |
-| New button label        | Optional text for that button, for example `New event`. Empty means New Topic.                                                                                                           |
-| New button type         | `topic` opens a plain composer. `event` also inserts an event block starting at the next full hour.                                                                                      |
-| Only topics with events | Optional. Hides topics in the list that have no event object, such as archive posts. They are hidden in the browser, so the list still pages through them.                               |
-| Hide topic list         | Optional. Hides the standard topic list on that page.                                                                                                                                    |
+| Field                   | Description                                                                                                                                                                                                      |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| List slug               | The slug as set in Custom Topic Lists, for example `events` for `/lists/events`. Matched exactly, ignoring case.                                                                                                 |
+| Layout                  | `calendar` shows the full calendar above the topic list. `sidebar` shows an upcoming events list to the right of the topic list (desktop only).                                                                  |
+| Show new button         | Optional. Adds a New Topic button to the list's navigation bar that opens the composer. Prefills the category and tags only when the list's Custom Topic Lists query sets exactly one category or required tags. |
+| New button label        | Optional text for that button, for example `New Event`. Empty means New Topic.                                                                                                                                   |
+| New button type         | `topic` opens a plain composer. `event` also inserts an event block starting at the next full hour.                                                                                                              |
+| Only topics with events | Optional. Hides topics in the list that have no event object, such as archive posts. They are hidden in the browser, so the list still pages through them.                                                       |
+| Hide topic list         | Optional. Hides the standard topic list on that page.                                                                                                                                                            |
 
 Lists themselves, including which topics they show, are managed in Custom Topic Lists. This component does not change a list's query, and the calendar and sidebar always show all events.
 
