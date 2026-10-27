@@ -1,7 +1,7 @@
 import { module, test } from "qunit";
 import {
+  composerLabel,
   findListPage,
-  prefillFromQuery,
   showsCalendar,
   showsSidebar,
 } from "../../../discourse/lib/list-page";
@@ -49,46 +49,25 @@ module("Unit | Lib | list-page", function () {
     assert.false(showsSidebar(undefined));
   });
 
-  test("prefillFromQuery uses one positive category and AND tags", function (assert) {
-    const categories = [
-      { id: 1, slug: "products" },
-      { id: 2, slug: "auditor", parent_category_id: 1 },
-      { id: 3, slug: "news", parent_category_id: 2 },
-    ];
+  test("composerLabel turns the button label into the composer text", function (assert) {
+    const page = (label) => ({ new_button: true, new_label: label });
 
-    assert.deepEqual(prefillFromQuery("tag:events", categories), {
-      category: undefined,
-      tags: ["events"],
-    });
+    assert.strictEqual(composerLabel(page("New Event")), "Create Event");
+    assert.strictEqual(composerLabel(page("new webinar")), "Create webinar");
     assert.strictEqual(
-      prefillFromQuery("category:products:auditor:news", categories).category,
-      categories[2]
+      composerLabel(page("  New   Learning Lab ")),
+      "Create Learning Lab"
     );
-    assert.strictEqual(
-      prefillFromQuery("category:3 tag:a+b", categories).category,
-      categories[2]
-    );
-    assert.deepEqual(prefillFromQuery("tag:a+b", categories).tags, ["a", "b"]);
+    assert.strictEqual(composerLabel(page("Event")), "Create Event");
   });
 
-  test("prefillFromQuery leaves ambiguous or negated terms to the author", function (assert) {
-    const categories = [
-      { id: 1, slug: "a" },
-      { id: 2, slug: "b" },
-    ];
-
+  test("composerLabel stays empty without a button or a label", function (assert) {
+    assert.strictEqual(composerLabel(undefined), undefined);
+    assert.strictEqual(composerLabel({ new_label: "New Event" }), undefined);
+    assert.strictEqual(composerLabel({ new_button: true }), undefined);
     assert.strictEqual(
-      prefillFromQuery("category:a,b", categories).category,
+      composerLabel({ new_button: true, new_label: "New" }),
       undefined
     );
-    assert.deepEqual(prefillFromQuery("tag:a,b", categories).tags, []);
-    assert.deepEqual(prefillFromQuery("-tag:x -category:a", categories), {
-      category: undefined,
-      tags: [],
-    });
-    assert.deepEqual(prefillFromQuery(undefined), {
-      category: undefined,
-      tags: [],
-    });
   });
 });
