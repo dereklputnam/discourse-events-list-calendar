@@ -1,6 +1,13 @@
 .events-list-sidebar {
   box-sizing: border-box;
 
+  // Horizon clamps event names to one line, which cuts them off in this
+  // narrow column
+  .upcoming-events-list__event-name {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+
   &__heading {
     padding-bottom: 0.5em;
     margin-bottom: 0.5em;
