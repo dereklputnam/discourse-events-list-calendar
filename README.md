@@ -14,17 +14,30 @@ The Discourse Calendar category calendar needs a category ID. Custom list pages 
 
 `list_pages` has one row per list page:
 
-| Field                   | Description                                                                                                                                                |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| List slug               | The slug as set in Custom Topic Lists, for example `events` for `/lists/events`. Matched exactly, ignoring case.                                           |
-| Layout                  | `calendar` shows the full calendar above the topic list. `sidebar` shows an upcoming events list to the right of the topic list (desktop only).            |
-| Show new button         | Optional. Adds a New Topic button to the list's navigation bar that opens a blank composer, so the author chooses the category and tags.                   |
-| New button label        | Optional text for that button, for example `New Event`. The composer's buttons follow it, so `New Event` becomes `Create Event`. Empty means New Topic.    |
-| New button type         | `topic` opens a plain composer. `event` also inserts an event block starting at the next full hour.                                                        |
-| Only topics with events | Optional. Hides topics in the list that have no event object, such as archive posts. They are hidden in the browser, so the list still pages through them. |
-| Hide topic list         | Optional. Hides the standard topic list on that page.                                                                                                      |
+| Field               | Description                                                                                                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| List slug           | The slug as set in Custom Topic Lists, for example `events` for `/lists/events`. Matched exactly, ignoring case.                                                             |
+| Layout              | `calendar` shows the full calendar above the topic list. `sidebar` shows an upcoming events list to the right of the topic list (desktop only).                              |
+| Show new button     | Optional. Adds a New Topic button to the list's navigation bar that opens a blank composer, so the author chooses the category and tags.                                     |
+| New button label    | Optional text for that button, for example `New Event`. The composer's buttons follow it, so `New Event` becomes `Create Event`. Empty means New Topic.                      |
+| New button category | Optional. New topics started on this list page default to this category. It also applies to Horizon's sidebar New Topic button and the `c` shortcut while that page is open. |
+| New button type     | `topic` opens a plain composer. `event` also inserts an event block starting at the next full hour.                                                                          |
+| Hide topic list     | Optional. Hides the standard topic list on that page.                                                                                                                        |
 
 Lists themselves, including which topics they show, are managed in Custom Topic Lists. This component does not change a list's query, and the calendar and sidebar always show all events.
+
+## Showing only topics with events
+
+What a list shows is decided by its query in Custom Topic Lists, and Discourse can now filter by events there (added in [discourse/discourse#45158](https://github.com/discourse/discourse/pull/45158)). Add these to the list's query, for example `tag:events event:any`:
+
+| Query term                                      | Meaning                                                                            |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `event:any`                                     | Only topics that have an event. Archive posts without one are left out.            |
+| `-event:any`                                    | Only topics without an event.                                                      |
+| `event:upcoming`, `event:ongoing`, `event:past` | Filter by the event's state. A comma means any of, as in `event:upcoming,ongoing`. |
+| `order:event-start-asc`                         | Sort by event start, soonest first. `order:event-start` sorts latest first.        |
+
+For an upcoming events list, use `event:upcoming,ongoing order:event-start-asc`. This filters on the server, so paging and counts stay correct. The calendar and sidebar always show all events and are not affected by it.
 
 ## How it works
 

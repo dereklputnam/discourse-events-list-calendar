@@ -27,3 +27,10 @@ export function composerLabel(page) {
   const noun = (page.new_label || "").trim().replace(/^new\b\s*/i, "");
   return noun ? `Create ${noun}` : undefined;
 }
+
+// The category a new topic should default to on this list page, if the row sets
+// one. `categories` is the site's category list.
+export function newTopicCategory(page, categories = []) {
+  const id = Number([].concat(page?.new_category ?? [])[0]);
+  return id ? categories.find((c) => c.id === id) : undefined;
+}

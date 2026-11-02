@@ -2,6 +2,7 @@ import { module, test } from "qunit";
 import {
   composerLabel,
   findListPage,
+  newTopicCategory,
   showsCalendar,
   showsSidebar,
 } from "../../../discourse/lib/list-page";
@@ -69,5 +70,38 @@ module("Unit | Lib | list-page", function () {
       composerLabel({ new_button: true, new_label: "New" }),
       undefined
     );
+  });
+
+  test("newTopicCategory finds the row's category", function (assert) {
+    const categories = [{ id: 1 }, { id: 2 }];
+
+    assert.strictEqual(
+      newTopicCategory({ new_category: [2] }, categories),
+      categories[1]
+    );
+    assert.strictEqual(
+      newTopicCategory({ new_category: 1 }, categories),
+      categories[0]
+    );
+    assert.strictEqual(
+      newTopicCategory({ new_category: ["2"] }, categories),
+      categories[1]
+    );
+  });
+
+  test("newTopicCategory is empty without a usable category", function (assert) {
+    const categories = [{ id: 1 }];
+
+    assert.strictEqual(newTopicCategory({}, categories), undefined);
+    assert.strictEqual(
+      newTopicCategory({ new_category: [] }, categories),
+      undefined
+    );
+    assert.strictEqual(
+      newTopicCategory({ new_category: [9] }, categories),
+      undefined
+    );
+    assert.strictEqual(newTopicCategory(undefined, categories), undefined);
+    assert.strictEqual(newTopicCategory({ new_category: [1] }), undefined);
   });
 });

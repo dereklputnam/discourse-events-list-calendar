@@ -18,9 +18,9 @@ en:
             new_label:
               label: "New button label"
               description: "Text of the button, for example New Event. The composer buttons follow it, so New Event becomes Create Event. Leave empty for New Topic."
-            events_only:
-              label: "Only topics with events"
-              description: "Hide topics in the list that have no event object, such as archive posts. They are hidden in the browser, so the list's paging still counts them."
+            new_category:
+              label: "New button category"
+              description: "Optional. New topics started on this list page default to this category, so authors start in the right place. This also applies to the sidebar New Topic button and the c shortcut on this page."
             hide_topic_list:
               label: "Hide topic list"
               description: "Hide the standard topic list on this page"

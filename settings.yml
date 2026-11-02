@@ -20,7 +20,9 @@ list_pages:
         type: boolean
       new_label:
         type: string
-      events_only:
-        type: boolean
+      new_category:
+        type: categories
+        validations:
+          max: 1
       hide_topic_list:
         type: boolean
