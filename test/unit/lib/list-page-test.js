@@ -1,6 +1,7 @@
 import { module, test } from "qunit";
 import {
   composerLabel,
+  eventBody,
   findListPage,
   newTopicCategory,
   showsCalendar,
@@ -103,5 +104,19 @@ module("Unit | Lib | list-page", function () {
     );
     assert.strictEqual(newTopicCategory(undefined, categories), undefined);
     assert.strictEqual(newTopicCategory({ new_category: [1] }), undefined);
+  });
+
+  test("eventBody starts at the next full hour and lasts an hour", function (assert) {
+    assert.strictEqual(
+      eventBody("America/New_York", new Date(2026, 10, 5, 13, 20)),
+      '[event start="2026-11-05 14:00" end="2026-11-05 15:00" status="public" timezone="America/New_York"]\n[/event]'
+    );
+  });
+
+  test("eventBody rolls over midnight and month ends", function (assert) {
+    assert.strictEqual(
+      eventBody("UTC", new Date(2026, 9, 31, 23, 40)),
+      '[event start="2026-11-01 00:00" end="2026-11-01 01:00" status="public" timezone="UTC"]\n[/event]'
+    );
   });
 });

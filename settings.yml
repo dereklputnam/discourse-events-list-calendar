@@ -20,6 +20,8 @@ list_pages:
         type: boolean
       new_label:
         type: string
+      new_event:
+        type: boolean
       new_category:
         type: categories
         validations:

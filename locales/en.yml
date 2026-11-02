@@ -18,6 +18,9 @@ en:
             new_label:
               label: "New button label"
               description: "Text of the button, for example New Event. The composer buttons follow it, so New Event becomes Create Event. Leave empty for New Topic."
+            new_event:
+              label: "Start with an event"
+              description: "New topics started on this list page open with an event block that starts at the next full hour and lasts an hour, shown as the event input box in the rich editor. It stays when the category changes, and works together with an Events category."
             new_category:
               label: "New button category"
               description: "Optional. New topics started on this list page default to this category, so authors start in the right place. This also applies to the sidebar New Topic button and the c shortcut on this page."
