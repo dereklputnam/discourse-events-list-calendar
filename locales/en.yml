@@ -20,7 +20,7 @@ en:
               description: "Button text, e.g. New Event. The composer buttons follow it (Create Event). Empty means New Topic."
             new_icon:
               label: "New button icon"
-              description: "Pick an icon, e.g. calendar-plus. Empty means the pen icon. Phones show only the icon."
+              description: "Pick an icon, e.g. calendar-day. Empty means the pen icon. Phones show only the icon."
             hide_sidebar_button:
               label: "Hide Horizon sidebar button"
               description: "Horizon only. Hide the sidebar New Topic button on this page. Otherwise it matches the button above."
