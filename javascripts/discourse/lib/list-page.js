@@ -47,3 +47,11 @@ export function eventBody(timezone, now = new Date()) {
 
   return `[event start="${format(start)}" end="${format(end)}" status="public" timezone="${timezone}"]\n[/event]`;
 }
+
+// Icon for the new-topic buttons on a list page. Falls back to the pen icon the
+// Horizon sidebar button uses. A leading "fa-" prefix is tolerated.
+export function newIcon(page) {
+  return (
+    (page?.new_icon || "").trim().replace(/^fa-/, "") || "far-pen-to-square"
+  );
+}

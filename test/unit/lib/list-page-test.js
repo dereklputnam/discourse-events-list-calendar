@@ -3,6 +3,7 @@ import {
   composerLabel,
   eventBody,
   findListPage,
+  newIcon,
   newTopicCategory,
   showsCalendar,
   showsSidebar,
@@ -118,5 +119,15 @@ module("Unit | Lib | list-page", function () {
       eventBody("UTC", new Date(2026, 9, 31, 23, 40)),
       '[event start="2026-11-01 00:00" end="2026-11-01 01:00" status="public" timezone="UTC"]\n[/event]'
     );
+  });
+
+  test("newIcon uses the row's icon, tolerating a fa- prefix", function (assert) {
+    assert.strictEqual(
+      newIcon({ new_icon: "far-calendar-plus" }),
+      "far-calendar-plus"
+    );
+    assert.strictEqual(newIcon({ new_icon: " fa-plus " }), "plus");
+    assert.strictEqual(newIcon({}), "far-pen-to-square");
+    assert.strictEqual(newIcon(undefined), "far-pen-to-square");
   });
 });

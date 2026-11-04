@@ -7,6 +7,7 @@ import {
   composerLabel,
   eventBody,
   findListPage,
+  newIcon,
   newTopicCategory,
   showsSidebar,
 } from "../lib/list-page";
@@ -65,11 +66,37 @@ export default apiInitializer((api) => {
         return;
       }
 
-      I18n.translations[I18n.locale].js.events_list_calendar = {
+      const js = I18n.translations[I18n.locale].js;
+      js.events_list_calendar = {
+        ...js.events_list_calendar,
         composer: { save: label },
       };
       return SAVE_LABEL_KEY;
     },
+  });
+
+  // Horizon's sidebar New Topic button reads its label and icon through these
+  // transformers, so on a list page it matches our button. The label is a key.
+  const BUTTON_KEY = "events_list_calendar.new_button";
+  const buttonPage = () => {
+    const page = findListPage(router.currentURL);
+    return page?.new_button ? page : undefined;
+  };
+
+  api.registerValueTransformer("create-topic-label", ({ value }) => {
+    const label = buttonPage()?.new_label?.trim();
+    if (!label || value !== "topic.create") {
+      return value;
+    }
+
+    const js = I18n.translations[I18n.locale].js;
+    js.events_list_calendar = { ...js.events_list_calendar, new_button: label };
+    return BUTTON_KEY;
+  });
+
+  api.registerValueTransformer("create-topic-icon", ({ value }) => {
+    const page = buttonPage();
+    return page?.new_icon?.trim() ? newIcon(page) : value;
   });
 
   api.onPageChange((url) => {
@@ -78,6 +105,10 @@ export default apiInitializer((api) => {
     document.body.classList.toggle(
       "has-events-list-hidden-topics",
       !!page?.hide_topic_list
+    );
+    document.body.classList.toggle(
+      "has-events-list-no-sidebar-button",
+      !!page?.hide_sidebar_button
     );
     document.body.classList.toggle(
       "has-events-list-sidebar",

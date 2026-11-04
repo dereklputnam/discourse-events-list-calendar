@@ -18,6 +18,12 @@ en:
             new_label:
               label: "New button label"
               description: "Text of the button, for example New Event. The composer buttons follow it, so New Event becomes Create Event. Leave empty for New Topic."
+            new_icon:
+              label: "New button icon"
+              description: "Icon name for the button, for example calendar-plus or far-calendar-plus. Leave empty for the pen icon. On phones the button shows only the icon."
+            hide_sidebar_button:
+              label: "Hide Horizon sidebar button"
+              description: "Horizon only. Hides the sidebar New Topic button on this list page, leaving the button above the list. When it is left visible, it shows the same label and icon."
             new_event:
               label: "Start with an event"
               description: "New topics started on this list page open with an event block that starts at the next full hour and lasts an hour, shown as the event input box in the rich editor. It stays when the category changes, and works together with an Events category."

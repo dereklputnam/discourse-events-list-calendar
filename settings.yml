@@ -20,6 +20,10 @@ list_pages:
         type: boolean
       new_label:
         type: string
+      new_icon:
+        type: string
+      hide_sidebar_button:
+        type: boolean
       new_event:
         type: boolean
       new_category:

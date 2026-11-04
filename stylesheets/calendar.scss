@@ -11,3 +11,17 @@
     display: none;
   }
 }
+
+// Optional: hide Horizon's sidebar New Topic button on list pages
+.has-events-list-no-sidebar-button .sidebar-new-topic-button__wrapper {
+  display: none;
+}
+
+// Icon-only on phones; the label stays as the tooltip and accessible name
+.events-list-new__button {
+  @include viewport.until(sm) {
+    .d-button-label {
+      display: none;
+    }
+  }
+}
