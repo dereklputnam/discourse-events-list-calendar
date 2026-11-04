@@ -8,28 +8,28 @@ en:
           properties:
             slug:
               label: "List slug"
-              description: "The slug of the list as set in Custom Topic Lists, e.g. events for /lists/events"
+              description: "Slug of the list in Custom Topic Lists, e.g. events for /lists/events"
             layout:
               label: "Layout"
-              description: "Full calendar, or upcoming events sidebar"
+              description: "Full calendar, or an upcoming events sidebar"
             new_button:
               label: "Show new button"
-              description: "Show a New Topic button in the list's navigation bar, like on the latest page. The composer opens blank, so the author chooses the category and tags."
+              description: "Add a New button to the list's navigation bar. The composer opens blank."
             new_label:
               label: "New button label"
-              description: "Text of the button, for example New Event. The composer buttons follow it, so New Event becomes Create Event. Leave empty for New Topic."
+              description: "Button text, e.g. New Event. The composer buttons follow it (Create Event). Empty means New Topic."
             new_icon:
               label: "New button icon"
-              description: "Icon name for the button, for example calendar-plus or far-calendar-plus. Leave empty for the pen icon. On phones the button shows only the icon."
+              description: "Icon name, e.g. far-calendar-plus. Empty means the pen icon. Phones show only the icon."
             hide_sidebar_button:
               label: "Hide Horizon sidebar button"
-              description: "Horizon only. Hides the sidebar New Topic button on this list page, leaving the button above the list. When it is left visible, it shows the same label and icon."
+              description: "Horizon only. Hide the sidebar New Topic button on this page. Otherwise it matches the button above."
             new_event:
               label: "Start with an event"
-              description: "New topics started on this list page open with an event block that starts at the next full hour and lasts an hour, shown as the event input box in the rich editor. It stays when the category changes, and works together with an Events category."
+              description: "New topics open with an event block starting at the next full hour, lasting an hour."
             new_category:
               label: "New button category"
-              description: "Optional. New topics started on this list page default to this category, so authors start in the right place. This also applies to the sidebar New Topic button and the c shortcut on this page."
+              description: "Optional. New topics default to this category, including from the sidebar button and the c shortcut."
             hide_topic_list:
               label: "Hide topic list"
               description: "Hide the standard topic list on this page"
