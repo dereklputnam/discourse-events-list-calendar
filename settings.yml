@@ -21,7 +21,7 @@ list_pages:
       new_label:
         type: string
       new_icon:
-        type: string
+        type: icon
       hide_sidebar_button:
         type: boolean
       new_event:
