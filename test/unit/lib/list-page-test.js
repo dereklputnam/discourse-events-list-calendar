@@ -5,6 +5,7 @@ import {
   findListPage,
   newIcon,
   newTopicCategory,
+  newTopicTags,
   showsCalendar,
   showsSidebar,
 } from "../../../discourse/lib/list-page";
@@ -129,5 +130,15 @@ module("Unit | Lib | list-page", function () {
     assert.strictEqual(newIcon({ new_icon: " fa-plus " }), "plus");
     assert.strictEqual(newIcon({}), "far-pen-to-square");
     assert.strictEqual(newIcon(undefined), "far-pen-to-square");
+  });
+
+  test("newTopicTags returns the row's tags", function (assert) {
+    assert.deepEqual(newTopicTags({ new_tags: ["events", "news"] }), [
+      "events",
+      "news",
+    ]);
+    assert.deepEqual(newTopicTags({ new_tags: "events" }), ["events"]);
+    assert.deepEqual(newTopicTags({}), []);
+    assert.deepEqual(newTopicTags(undefined), []);
   });
 });

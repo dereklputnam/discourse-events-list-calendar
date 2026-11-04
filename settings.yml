@@ -30,5 +30,7 @@ list_pages:
         type: categories
         validations:
           max: 1
+      new_tags:
+        type: tags
       hide_topic_list:
         type: boolean

@@ -35,6 +35,11 @@ export function newTopicCategory(page, categories = []) {
   return id ? categories.find((c) => c.id === id) : undefined;
 }
 
+// Tag names a new topic should start with on this list page, if the row sets any.
+export function newTopicTags(page) {
+  return [].concat(page?.new_tags ?? []).filter(Boolean);
+}
+
 // Starting text for a new event topic: an event block that begins at the next
 // full hour and lasts an hour.
 export function eventBody(timezone, now = new Date()) {

@@ -30,6 +30,9 @@ en:
             new_category:
               label: "New button category"
               description: "Optional. New topics default to this category, including from the sidebar button and the c shortcut."
+            new_tags:
+              label: "New button tags"
+              description: "Optional. New topics default to these tags, including from the sidebar button and the c shortcut."
             hide_topic_list:
               label: "Hide topic list"
               description: "Hide the standard topic list on this page"

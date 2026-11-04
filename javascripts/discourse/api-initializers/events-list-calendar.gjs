@@ -9,6 +9,7 @@ import {
   findListPage,
   newIcon,
   newTopicCategory,
+  newTopicTags,
   showsSidebar,
 } from "../lib/list-page";
 
@@ -37,6 +38,11 @@ export default apiInitializer((api) => {
 
     if (category) {
       model.set("categoryId", category.id);
+    }
+
+    const tags = newTopicTags(page);
+    if (tags.length) {
+      model.set("tags", tags);
     }
 
     if (page?.new_event && !model.reply) {
