@@ -40,3 +40,6 @@ en:
     heading: "Upcoming events"
     view_all: "View all"
     empty: "No upcoming events"
+  calendar:
+    show: "Show calendar"
+    hide: "Hide calendar"

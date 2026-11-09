@@ -60,3 +60,9 @@ export function newIcon(page) {
     (page?.new_icon || "").trim().replace(/^fa-/, "") || "far-pen-to-square"
   );
 }
+
+// Whether the calendar starts minimised: the stored choice ("1" or "0") wins,
+// otherwise it starts minimised on mobile to save room.
+export function calendarCollapsed(stored, mobile) {
+  return stored === "1" ? true : stored === "0" ? false : !!mobile;
+}

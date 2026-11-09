@@ -2,6 +2,12 @@
   margin-bottom: var(--space-6);
 }
 
+.events-list-calendar-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--space-2);
+}
+
 .has-events-list-hidden-topics {
   .contents > .topic-list,
   .contents > .topic-list-header,

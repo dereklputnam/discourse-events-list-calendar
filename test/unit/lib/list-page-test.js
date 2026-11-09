@@ -1,5 +1,6 @@
 import { module, test } from "qunit";
 import {
+  calendarCollapsed,
   composerLabel,
   eventBody,
   findListPage,
@@ -140,5 +141,12 @@ module("Unit | Lib | list-page", function () {
     assert.deepEqual(newTopicTags({ new_tags: "events" }), ["events"]);
     assert.deepEqual(newTopicTags({}), []);
     assert.deepEqual(newTopicTags(undefined), []);
+  });
+
+  test("calendarCollapsed prefers the stored choice, else collapses on mobile", function (assert) {
+    assert.true(calendarCollapsed("1", false));
+    assert.false(calendarCollapsed("0", true));
+    assert.true(calendarCollapsed(null, true));
+    assert.false(calendarCollapsed(null, false));
   });
 });

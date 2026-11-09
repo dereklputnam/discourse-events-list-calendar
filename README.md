@@ -56,3 +56,8 @@ For an upcoming events list, use `event:upcoming,ongoing order:event-start-asc`.
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+## Calendar behavior
+
+- The calendar has a **Hide calendar / Show calendar** button. The choice is remembered per list in the browser, and the calendar starts hidden on phones until the visitor opens it.
+- The calendar opens in the events plugin's **Upcoming events default view** (`calendar_upcoming_events_default_view`), on desktop and mobile.

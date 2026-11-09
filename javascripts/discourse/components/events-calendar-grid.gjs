@@ -47,6 +47,7 @@ export default class EventsCalendarGrid extends Component {
       {{#if FullCalendar}}
         <FullCalendar
           @height="650px"
+          @initialView={{this.siteSettings.calendar_upcoming_events_default_view}}
           @placeholder={{true}}
           @onLoadEvents={{this.loadEvents}}
           @refreshKey={{this.refreshKey}}
