@@ -3,9 +3,9 @@ import {
   calendarCollapsed,
   composerLabel,
   eventBody,
+  eventsDefaultCategory,
   findListPage,
   newIcon,
-  newTopicCategory,
   newTopicTags,
   showsCalendar,
   showsSidebar,
@@ -76,37 +76,18 @@ module("Unit | Lib | list-page", function () {
     );
   });
 
-  test("newTopicCategory finds the row's category", function (assert) {
-    const categories = [{ id: 1 }, { id: 2 }];
+  test("eventsDefaultCategory needs a category the user can post in", function (assert) {
+    const categories = [
+      { id: 1, canCreateTopic: true },
+      { id: 2, canCreateTopic: false },
+    ];
 
-    assert.strictEqual(
-      newTopicCategory({ new_category: [2] }, categories),
-      categories[1]
-    );
-    assert.strictEqual(
-      newTopicCategory({ new_category: 1 }, categories),
-      categories[0]
-    );
-    assert.strictEqual(
-      newTopicCategory({ new_category: ["2"] }, categories),
-      categories[1]
-    );
-  });
-
-  test("newTopicCategory is empty without a usable category", function (assert) {
-    const categories = [{ id: 1 }];
-
-    assert.strictEqual(newTopicCategory({}, categories), undefined);
-    assert.strictEqual(
-      newTopicCategory({ new_category: [] }, categories),
-      undefined
-    );
-    assert.strictEqual(
-      newTopicCategory({ new_category: [9] }, categories),
-      undefined
-    );
-    assert.strictEqual(newTopicCategory(undefined, categories), undefined);
-    assert.strictEqual(newTopicCategory({ new_category: [1] }), undefined);
+    assert.strictEqual(eventsDefaultCategory(1, categories), categories[0]);
+    assert.strictEqual(eventsDefaultCategory("1", categories), categories[0]);
+    assert.strictEqual(eventsDefaultCategory(2, categories), undefined);
+    assert.strictEqual(eventsDefaultCategory(9, categories), undefined);
+    assert.strictEqual(eventsDefaultCategory("", categories), undefined);
+    assert.strictEqual(eventsDefaultCategory(1), undefined);
   });
 
   test("eventBody starts at the next full hour and lasts an hour", function (assert) {

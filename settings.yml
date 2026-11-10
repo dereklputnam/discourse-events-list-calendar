@@ -26,10 +26,6 @@ list_pages:
         type: boolean
       new_event:
         type: boolean
-      new_category:
-        type: categories
-        validations:
-          max: 1
       new_tags:
         type: tags
       hide_topic_list:

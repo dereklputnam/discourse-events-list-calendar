@@ -28,11 +28,12 @@ export function composerLabel(page) {
   return noun ? `Create ${noun}` : undefined;
 }
 
-// The category a new topic should default to on this list page, if the row sets
-// one. `categories` is the site's category list.
-export function newTopicCategory(page, categories = []) {
-  const id = Number([].concat(page?.new_category ?? [])[0]);
-  return id ? categories.find((c) => c.id === id) : undefined;
+// The category new topics default to on list pages: the events plugin's
+// "upcoming events default category" site setting, if the user can post there.
+export function eventsDefaultCategory(categoryId, categories = []) {
+  const id = Number(categoryId);
+  const category = id ? categories.find((c) => c.id === id) : undefined;
+  return category?.canCreateTopic ? category : undefined;
 }
 
 // Tag names a new topic should start with on this list page, if the row sets any.

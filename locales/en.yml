@@ -27,9 +27,6 @@ en:
             new_event:
               label: "Start with an event"
               description: "New topics open with an event block starting at the next full hour, lasting an hour."
-            new_category:
-              label: "New button category"
-              description: "Optional. New topics default to this category, including from the sidebar button and the c shortcut."
             new_tags:
               label: "New button tags"
               description: "Optional. New topics default to these tags, including from the sidebar button and the c shortcut."

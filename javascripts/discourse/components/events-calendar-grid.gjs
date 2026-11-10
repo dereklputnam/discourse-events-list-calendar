@@ -12,13 +12,56 @@ import formatEventForCalendar from "discourse/plugins/discourse-events/discourse
   discourseImport: "optional",
 };
 
+import openEventComposer from "discourse/plugins/discourse-events/discourse/lib/open-event-composer" with {
+  discourseImport: "optional",
+};
+import {
+  eventsDefaultCategory,
+  findListPage,
+  newTopicTags,
+} from "../lib/list-page";
+
 export default class EventsCalendarGrid extends Component {
+  @service composer;
   @service currentUser;
+  @service router;
+  @service site;
   @service siteSettings;
   @service discoursePostEventService;
 
+  // Same rule as the plugin's own calendars
+  get canCreateEvent() {
+    return (
+      !!openEventComposer &&
+      this.currentUser?.can_create_discourse_post_event &&
+      this.currentUser?.can_create_topic
+    );
+  }
+
   get refreshKey() {
     return String(this.currentUser?.id);
+  }
+
+  // Clicking a day or dragging a range opens a new event starting there.
+  @action
+  async createEvent(info) {
+    const category = eventsDefaultCategory(
+      this.siteSettings.calendar_upcoming_events_default_category,
+      this.site.categories
+    );
+
+    await openEventComposer({
+      composer: this.composer,
+      currentUser: this.currentUser,
+      siteSettings: this.siteSettings,
+      info,
+      category: category ?? null,
+    });
+
+    const tags = newTopicTags(findListPage(this.router.currentURL));
+    if (tags.length) {
+      this.composer.model?.set("tags", tags);
+    }
   }
 
   @action
@@ -49,6 +92,7 @@ export default class EventsCalendarGrid extends Component {
           @height="650px"
           @initialView={{this.siteSettings.calendar_upcoming_events_default_view}}
           @placeholder={{true}}
+          @onDateClick={{if this.canCreateEvent this.createEvent}}
           @onLoadEvents={{this.loadEvents}}
           @refreshKey={{this.refreshKey}}
         />

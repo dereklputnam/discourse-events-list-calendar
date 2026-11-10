@@ -6,9 +6,9 @@ import EventsNewTopicButton from "../components/events-new-topic-button";
 import {
   composerLabel,
   eventBody,
+  eventsDefaultCategory,
   findListPage,
   newIcon,
-  newTopicCategory,
   newTopicTags,
   showsSidebar,
 } from "../lib/list-page";
@@ -31,8 +31,13 @@ export default apiInitializer((api) => {
     }
 
     const page = findListPage(router.currentURL);
-    const category = newTopicCategory(
-      page,
+    if (!page) {
+      return;
+    }
+
+    const category = eventsDefaultCategory(
+      api.container.lookup("service:site-settings")
+        .calendar_upcoming_events_default_category,
       api.container.lookup("service:site").categories
     );
 
@@ -111,6 +116,10 @@ export default apiInitializer((api) => {
     document.body.classList.toggle(
       "has-events-list-hidden-topics",
       !!page?.hide_topic_list
+    );
+    document.body.classList.toggle(
+      "has-events-list-simple-nav",
+      !!page
     );
     document.body.classList.toggle(
       "has-events-list-no-sidebar-button",
