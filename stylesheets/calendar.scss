@@ -38,3 +38,8 @@
     display: none !important;
   }
 }
+
+// Calendar toggle to the right of the new button, when a list asks for it
+.has-events-list-toggle-right .events-list-calendar-toggle__button {
+  order: 1;
+}

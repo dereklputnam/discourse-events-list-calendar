@@ -22,6 +22,11 @@ list_pages:
         type: string
       new_icon:
         type: icon
+      toggle_position:
+        type: enum
+        choices:
+          - left
+          - right
       hide_sidebar_button:
         type: boolean
       new_event:

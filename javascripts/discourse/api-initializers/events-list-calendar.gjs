@@ -121,6 +121,10 @@ export default apiInitializer((api) => {
     );
     document.body.classList.toggle("has-events-list-simple-nav", !!page);
     document.body.classList.toggle(
+      "has-events-list-toggle-right",
+      page?.toggle_position === "right"
+    );
+    document.body.classList.toggle(
       "has-events-list-no-sidebar-button",
       !!page?.hide_sidebar_button
     );
