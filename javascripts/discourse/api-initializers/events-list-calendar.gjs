@@ -117,10 +117,7 @@ export default apiInitializer((api) => {
       "has-events-list-hidden-topics",
       !!page?.hide_topic_list
     );
-    document.body.classList.toggle(
-      "has-events-list-simple-nav",
-      !!page
-    );
+    document.body.classList.toggle("has-events-list-simple-nav", !!page);
     document.body.classList.toggle(
       "has-events-list-no-sidebar-button",
       !!page?.hide_sidebar_button
