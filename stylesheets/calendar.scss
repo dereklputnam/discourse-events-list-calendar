@@ -38,3 +38,9 @@
     display: none !important;
   }
 }
+
+// With the filters and tabs hidden, keep the Show/Hide calendar and new buttons
+// at the right of the bar, where the new button sits on other pages.
+.has-events-list-simple-nav .navigation-container .navigation-controls {
+  margin-inline-start: auto;
+}
