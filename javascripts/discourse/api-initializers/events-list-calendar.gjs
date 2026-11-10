@@ -1,5 +1,6 @@
 import { apiInitializer } from "discourse/lib/api";
 import I18n from "discourse-i18n";
+import EventsCalendarToggle from "../components/events-calendar-toggle";
 import EventsListCalendar from "../components/events-list-calendar";
 import EventsListSidebar from "../components/events-list-sidebar";
 import EventsNewTopicButton from "../components/events-new-topic-button";
@@ -17,6 +18,7 @@ export default apiInitializer((api) => {
   api.renderInOutlet("discovery-list-container-top", EventsListCalendar);
   api.renderInOutlet("discovery-list-container-top", EventsListSidebar);
   // Inside the navigation bar, where the New Topic button sits on /latest
+  api.renderInOutlet("after-create-topic-button", EventsCalendarToggle);
   api.renderInOutlet("after-create-topic-button", EventsNewTopicButton);
 
   const router = api.container.lookup("service:router");
